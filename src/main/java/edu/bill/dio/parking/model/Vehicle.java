@@ -2,22 +2,24 @@ package edu.bill.dio.parking.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Vehicle {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String license;
     private String state;
     private String model;
     private String color;
-    @OneToMany
+    @OneToMany(mappedBy = "vehicle",fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Ticket> ticketSet = new LinkedHashSet<>();
     public Vehicle() {    }

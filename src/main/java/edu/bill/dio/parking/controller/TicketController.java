@@ -3,34 +3,49 @@ package edu.bill.dio.parking.controller;
 import edu.bill.dio.parking.model.Ticket;
 import edu.bill.dio.parking.model.dto.TicketDTO;
 import edu.bill.dio.parking.service.TicketService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/tickets")
+@Api(tags = "Tickets Controller")
 public class TicketController {
     @Autowired
     TicketService ticketService;
     @PostMapping
-    Ticket create(@RequestBody TicketDTO dto){
-        return ticketService.create(dto);
+    @ApiOperation("Create Ticket")
+    ResponseEntity<Ticket> create(@RequestBody TicketDTO dto){
+        Ticket ticket = ticketService.create(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ticket);
     }
     @GetMapping
-    List<Ticket> findAll(){
-        return ticketService.findAll();
+    @ApiOperation("Find Tickets")
+    ResponseEntity<List<Ticket>> findAll(){
+        List<Ticket> tickets = ticketService.findAll();
+        return ResponseEntity.ok(tickets);
     }
-    @GetMapping("/id")
-    Ticket findById(@PathVariable Long id){
-        return ticketService.findById(id);
+    @GetMapping("/{id}")
+    @ApiOperation("Find Ticket")
+    ResponseEntity<Ticket> findById(@PathVariable Long id){
+        Ticket ticket = ticketService.findById(id);
+        return ResponseEntity.ok(ticket);
     }
-    @PutMapping("/id")
-    Ticket updateById(@PathVariable Long id,@RequestBody TicketDTO dto){
-        return ticketService.updateById(id,dto);
+    @PutMapping("/{id}")
+    @ApiOperation("Update Ticket")
+    ResponseEntity <Ticket> updateById(@PathVariable Long id,@RequestBody TicketDTO dto){
+        Ticket ticket = ticketService.updateById(id,dto);
+        return ResponseEntity.ok(ticket);
     }
-    @DeleteMapping("/id")
-    void deleteById(@PathVariable Long id){
+    @DeleteMapping("/{id}")
+    @ApiOperation("Delete Ticket")
+    ResponseEntity deleteById(@PathVariable Long id){
         ticketService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

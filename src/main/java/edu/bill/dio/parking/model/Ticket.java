@@ -1,16 +1,17 @@
 package edu.bill.dio.parking.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 public class Ticket {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Vehicle vehicle;
     private LocalDateTime entryDate = LocalDateTime.now();
     private LocalDateTime exitDate;

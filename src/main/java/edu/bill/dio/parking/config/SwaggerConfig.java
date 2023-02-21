@@ -27,11 +27,11 @@ public class SwaggerConfig {
 
         ApiInfoBuilder apiInfoBuilder = new ApiInfoBuilder();
         apiInfoBuilder.title("Title - Cloud Parking Rest API");
-        apiInfoBuilder.description("API exemplo de uso de Springboot REST API");
+        apiInfoBuilder.description("API Cloud Parking demonstrativo de Springboot REST API");
         apiInfoBuilder.version("1.0");
         apiInfoBuilder.termsOfServiceUrl("Termo de uso: Open Source");
-        apiInfoBuilder.license("Licença - Sua Empresa");
-        apiInfoBuilder.licenseUrl("http://www.seusite.com.br");
+        apiInfoBuilder.license("Licença - Bill Carioca");
+        apiInfoBuilder.licenseUrl("https://github.com/BillCarioca/");
         apiInfoBuilder.contact(this.contato());
         return apiInfoBuilder;
     }

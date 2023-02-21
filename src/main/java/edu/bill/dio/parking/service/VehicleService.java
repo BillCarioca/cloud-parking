@@ -1,5 +1,6 @@
 package edu.bill.dio.parking.service;
 
+import edu.bill.dio.parking.model.Ticket;
 import edu.bill.dio.parking.model.Vehicle;
 import edu.bill.dio.parking.model.dto.VehicleDTO;
 import edu.bill.dio.parking.repository.VehicleRepository;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class VehicleService {
@@ -19,8 +21,11 @@ public class VehicleService {
     public List<Vehicle> findAll(){
         return vehicleRepository.findAll();
     }
-    public Vehicle findById(long id){
+    public Vehicle findById(Long id){
         return vehicleRepository.findById(id).get();
+    }
+    public Set<Ticket> findTicketsById(Long id){
+        return vehicleRepository.findById(id).get().getTicketSet();
     }
     public Vehicle updateById(Long id, VehicleDTO dto){
         Vehicle vehicleUpdate = findById(id);
